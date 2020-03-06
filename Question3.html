@@ -1,0 +1,81 @@
+<html>
+  <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script>
+function myFunction() {
+var rate_value;
+  if(document.getElementById('650').checked){
+   rate_value = document.getElementById('650').value;
+   
+  }
+  if(document.getElementById('550').checked){
+   rate_value = document.getElementById('550').value;
+   
+  }
+  if(document.getElementById('450').checked){
+   rate_value = document.getElementById('450').value;
+   
+  }
+  document.getElementById('m1').innerHTML = rate_value;
+  
+}
+
+function companies() {
+var company_value;
+  if(document.getElementById('g').checked){
+   company_value = document.getElementById('g').value;
+   
+  }
+  if(document.getElementById('t').checked){
+   company_value = document.getElementById('t').value;
+   
+  }
+  if(document.getElementById('f').checked){
+   company_value = document.getElementById('f').value;
+   
+  }
+  document.getElementById('m2').innerHTML = company_value;
+  
+}
+</script>
+  </head>
+<body>
+    <div style="border: 1px solid black; " class="container ">
+     <div class="row box">
+       <div class="col-md-4"></div>
+       <div class="col-md-4 "><p class="title"><strong>Question 3<strong></p></div>   
+     </div>
+    <div class="row">
+     <div class="col-md-8">
+      As per latest twitter news, Complete the article snipper given by selecting appropriate choices for the blanks.
+      <div class="row">
+        <div class="col-md-6">
+         <div id="rates">
+         <input type="radio" id="650" name="rate" value="650" onClick="myFunction()"> 650<br>
+         <input type="radio" id="550" name="rate" value="550" onClick="myFunction()"> 550<br>
+         <input type="radio" id="450" name="rate" value="450" onClick="myFunction()"> 450<br>
+        </div>
+      </div>
+        <div class="col-md-6">
+          <div id="companies">
+         <input type="radio" id="g" name="company" value="Google" onClick="companies()"> Google<br>
+         <input type="radio" id="t" name="company" value="Twitter" onClick="companies()"> Twitter<br>
+         <input type="radio" id="f" name="company" value="Facebook" onClick="companies()"> Facebook<br>
+        </div>
+      </div>
+    </div><br><br>
+    <button >Submit & Next Question</button>
+        <button style="margin-left: 34px;margin-bottom: 30px; margin-top: 30px">Cancel & Clear Section</button>
+    </div>
+    <div class="col-md-4">
+      Twitter wants more cash. The company annouced two <mark id="m1">___</mark> million debt offering in filling today. each with potential $100 increase provided that the sales are oversubscribed. Assuming full tip, including the $100 million boosters, <mark id="m2">___</mark> will raise up to $1.5 billion with two offering.
+    </div>
+
+  </div>
+    </div>
+
+    
+
+  </body>
+  </html>
