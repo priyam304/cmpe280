@@ -24,7 +24,7 @@ app.use((req, res, next)=> {
 app.use('/scrape',scapeDataRoutes);
 
 
-mongoose.connect('mongodb+srv://user:password@health-spa-olu2t.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://user:password@scrape-olu2t.mongodb.net/test?retryWrites=true&w=majority');
 app.use((req,res,next)=>{
     res.status(200).json({
         message:"It works!"
