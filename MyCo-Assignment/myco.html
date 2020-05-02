@@ -1,0 +1,126 @@
+<html>
+  <head>
+   
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+
+  <body onload = "loadMap()">
+    <h2>MyCO Location</h2>
+    <a href="revenue.html">Retail Revenue</a>
+    <div id = "map" style = "width:1200px; height:500px;"></div>
+      <script>
+
+       
+        
+
+        function distributionMarkerData(location){
+         
+          var arr=[];
+          for(var i=0;i<location.length;i++){
+            
+            if(location[i].type=="Distribution Facility"){
+                arr.push(location[i]);
+            }
+          }
+
+          console.log(arr);
+          return arr;
+        }
+
+        function retailLocationMarkerData(location){
+         
+          var arr=[];
+          for(var i=0;i<location.length;i++){
+            
+            if(location[i].type=="RetailLocation"){
+                arr.push(location[i]);
+            }
+          }
+
+          console.log(arr);
+          return arr;
+        }
+
+        function callCenterMarkerData(location){
+         
+          var arr=[];
+          for(var i=0;i<location.length;i++){
+            
+            if(location[i].type=="Call Center"){
+                arr.push(location[i]);
+            }
+          }
+
+          console.log(arr);
+          return arr;
+        }
+
+        function headQuatersMarkerData(location){
+         
+          var arr=[];
+          for(var i=0;i<location.length;i++){
+            
+            if(location[i].type=="HeadQuarters"){
+                arr.push(location[i]);
+            }
+          }
+
+          console.log(arr);
+          return arr;
+        }
+
+
+        function loadMap() {
+         
+         //get data from backend 
+          var location=$.get("http://localhost:3000/location", function(data){
+           // Initialize Google Maps
+          const mapOptions = {
+            center:new google.maps.LatLng(37.75303, -122.423198),
+            zoom: 9
+          }
+          const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          const distributionMarkers=distributionMarkerData(data.location);
+          const calLCenterMarker = callCenterMarkerData(data.location);
+          const headQuatersMarker = headQuatersMarkerData(data.location);
+          const retailsMarker = retailLocationMarkerData(data.location);
+
+                for(distMarker of distributionMarkers) {
+                 let marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(distMarker.latitude, distMarker.longitude),
+                    icon:'red.png'
+              })
+            }
+
+                for(callMarker of calLCenterMarker) {
+                let marker = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(callMarker.latitude, callMarker.longitude),
+              icon:'blue.png'
+            })
+          }
+
+              for(headMarker of headQuatersMarker) {
+            let marker = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(headMarker.latitude, headMarker.longitude),
+              icon:'grey.png'
+            })
+          }
+
+            for(retailMarker of retailsMarker) {
+            let marker = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(retailMarker.latitude, retailMarker.longitude),
+              icon:'green.png'
+            })
+          }
+
+           });
+          
+          }
+      </script>
+      <script src = "https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE"></script>
+  </body>
+</html>

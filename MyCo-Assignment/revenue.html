@@ -1,0 +1,65 @@
+<html>
+  <head>
+   
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+
+  <body onload = "loadMap()">
+    <h2>MyCO Location</h2>
+    <a href="myco.html"> Locations</a>
+    <div id = "map" style = "width:1200px; height:500px;"></div>
+      <script>
+
+     
+        function getRetailRevenue(location){
+         
+          var arr=[];
+          for(var i=0;i<location.length;i++){
+            
+            if(location[i].type=="RetailLocation"){
+                arr.push(
+                    {
+                      "revenue":location[i].$revenue,
+                      "center": {lat: location[i].latitude, lng: location[i].longitude} 
+                  }
+                  );
+            }
+          }
+
+          console.log(arr);
+          return arr;
+        }
+
+
+        function loadMap() {
+         
+         //get data from backend 
+          var location=$.get("http://localhost:3000/location", function(data){
+           // Initialize Google Maps 
+          const mapOptions = {
+            //coordinates of headquater
+            center:new google.maps.LatLng(37.587546, -122.066716),
+            zoom: 11
+          }
+          const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+          const retailRevenue=getRetailRevenue(data.location);
+            for (var i=0;i<retailRevenue.length;i++) {
+          // Add the circle for this city to the map.
+          var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            map: map,
+            center: retailRevenue[i].center,
+            radius: Math.sqrt(retailRevenue[i].revenue)
+          });
+        }
+
+
+           });
+                    }
+      </script>
+      <script src = "https://maps.googleapis.com/maps/api/js?key=API_KEY_HERE"></script>
+
+  </body>
+</html>
